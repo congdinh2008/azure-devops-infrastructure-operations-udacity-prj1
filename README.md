@@ -99,6 +99,38 @@ For this project, you will write a Packer template and a Terraform template to d
   terraform destroy
   ```
 
+#### Note about vars.tf
+
+To customize the vars.tf file for use, you can modify the default values and descriptions of the variables according to your specific requirements. Here's a brief description of the variables and how you can customize them:
+
+1. resource_group_name: This variable represents the name of the resource group where the resources will be created. You can modify the default value to specify your desired resource group name.
+
+2. location: This variable defines the Azure region where the resources will be deployed. You can update the default value to set the desired region.
+
+3. tags: This variable is a map of tags that can be assigned to the deployed resources. You can customize the default value to add or modify tags according to your tagging strategy.
+
+4. packer_resource_group_name: This variable represents the name of the resource group where the Packer image will be created. You can change the default value to set your preferred resource group name.
+
+5. packer_image_name: This variable defines the name of the Packer image. You can update the default value to specify the desired image name.
+
+6. prefix: This variable sets the prefix to be used for all resources within the specified resource group. You can modify the default value to set your preferred prefix.
+
+7. environment: This variable specifies the environment to be built. You can update the default value to reflect the desired environment (e.g., development, production, staging).
+
+8. azure-subscription-id, azure-client-id, azure-client-secret, azure-tenant-id: These variables are used for Azure authentication. You need to provide the appropriate values for these variables to authenticate with your Azure subscription. Make sure to replace the default values with your own Azure credentials.
+
+9. network-interfaces-count: This variable determines the number of network interfaces to be created. You can modify the default value to specify the desired count.
+
+10. admin-user: This variable sets the username for the virtual machine's admin user. You can update the default value to specify your desired admin username.
+
+11. admin-password: This variable represents the password for the virtual machine's admin user. You should update the default value with your desired admin password. Alternatively, you can modify the variable to prompt for the password during deployment.
+
+12. vm-size: This variable defines the size of the virtual machine. You can change the default value to set the desired VM size.
+
+13. num_of_vms: This variable determines the number of virtual machine resources to create behind the load balancer. You can modify the default value to specify the desired number of VMs.
+
+After customizing the variables in the vars.tf file, you can use them in your Terraform code to create and configure Azure resources based on your specific requirements.
+
 ### Output
 1. Output after running the create_tagging_policy.sh
 ``` bash
@@ -570,7 +602,80 @@ Terraform will perform the following actions:
       + location            = "westeurope"
       + name                = "udacity-project1-sg"
       + resource_group_name = "Azuredevops"
-      + security_rule       = (known after apply)
+      + security_rule       = [
+          + {
+              + access                                     = "Allow"
+              + description                                = ""
+              + destination_address_prefix                 = "*"
+              + destination_address_prefixes               = []
+              + destination_application_security_group_ids = []
+              + destination_port_range                     = "80"
+              + destination_port_ranges                    = []
+              + direction                                  = "Inbound"
+              + name                                       = "AllowHTTPIncome"
+              + priority                                   = 102
+              + protocol                                   = "Tcp"
+              + source_address_prefix                      = "*"
+              + source_address_prefixes                    = []
+              + source_application_security_group_ids      = []
+              + source_port_range                          = "*"
+              + source_port_ranges                         = []
+            },
+          + {
+              + access                                     = "Allow"
+              + description                                = ""
+              + destination_address_prefix                 = "10.0.2.0/24"
+              + destination_address_prefixes               = []
+              + destination_application_security_group_ids = []
+              + destination_port_range                     = "*"
+              + destination_port_ranges                    = []
+              + direction                                  = "Inbound"
+              + name                                       = "AllowInboundInternal"
+              + priority                                   = 100
+              + protocol                                   = "*"
+              + source_address_prefix                      = "10.0.2.0/24"
+              + source_address_prefixes                    = []
+              + source_application_security_group_ids      = []
+              + source_port_range                          = "*"
+              + source_port_ranges                         = []
+            },
+          + {
+              + access                                     = "Allow"
+              + description                                = ""
+              + destination_address_prefix                 = "10.0.2.0/24"
+              + destination_address_prefixes               = []
+              + destination_application_security_group_ids = []
+              + destination_port_range                     = "*"
+              + destination_port_ranges                    = []
+              + direction                                  = "Outbound"
+              + name                                       = "AllowOutboundInternal"
+              + priority                                   = 101
+              + protocol                                   = "*"
+              + source_address_prefix                      = "10.0.2.0/24"
+              + source_address_prefixes                    = []
+              + source_application_security_group_ids      = []
+              + source_port_range                          = "*"
+              + source_port_ranges                         = []
+            },
+          + {
+              + access                                     = "Deny"
+              + description                                = ""
+              + destination_address_prefix                 = "*"
+              + destination_address_prefixes               = []
+              + destination_application_security_group_ids = []
+              + destination_port_range                     = "*"
+              + destination_port_ranges                    = []
+              + direction                                  = "Inbound"
+              + name                                       = "DenyDirectAccessFromtheInternet"
+              + priority                                   = 1000
+              + protocol                                   = "*"
+              + source_address_prefix                      = "*"
+              + source_address_prefixes                    = []
+              + source_application_security_group_ids      = []
+              + source_port_range                          = "*"
+              + source_port_ranges                         = []
+            },
+        ]
       + tags                = {
           + "create-by" = "congdinh2023"
         }
