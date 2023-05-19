@@ -4,7 +4,7 @@ policyName="tagging-policy"
 az policy definition create \
   -n $policyName \
   --rules ./tagging-policy.json \
-  --params ./policies/policy-definition-params.json \
+  --params ./policy-definition-params.json \
   --display-name "Require a tag on resources" \
   --description "Enforces a required tag and its value. Does not apply to resource groups." \
   --subscription "$subscription"
