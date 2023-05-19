@@ -2,12 +2,12 @@
   "variables": {
     "client_id": "{{env `AZ_CLIENT_ID`}}",
     "client_secret": "{{env `AZ_CLIENT_SECRET`}}",
-    "subscription_id": "{{env `AZ_SUSCRIPTION_ID`}}",
+    "subscription_id": "{{env `AZ_SUBSCRIPTION_ID`}}",
     "tenant_id": "{{env `AZ_TENANT_ID`}}",
 
     "image_name": "udacity-ubuntu-server-image",
     "resource_group": "Azuredevops",
-    "location": "southeastasia",
+    "location": "westeurope",
     "vm_size": "Standard_B1s"
   },
   "builders": [
