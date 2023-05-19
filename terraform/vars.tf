@@ -10,7 +10,7 @@ variable "resource_group_name" {
 variable "location" {
   type        = string
   description = "Location where resources will be created"
-  default     = "southeastasia"
+  default     = "westeurope"
 }
 
 variable "tags" {
